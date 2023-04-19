@@ -1,55 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Tabbed List using React.js</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+	<title>Inventory</title>
+	<style>
+		.selected {
+			background-color: green;
+		}
+	</style>
 </head>
 <body>
-  <div id="root"></div>
+	<h1>Inventory</h1>
 
-  <script type="text/babel">
-    // Define the tabs data
-    const tabsData = [
-      { label: 'Fruits', items: ['Apple', 'Banana', 'Pear', 'Watermelon', 'Grape', 'Strawberry', 'Mango', 'Blackberry'] },
-      { label: 'Spices', items: ['Salt', 'Pepper', 'Chilli', 'Herbs', 'Curry'] },
-      { label: 'Vegetables', items: ['Carrot', 'Cucumber'] }
-    ];
+	<div>
+		<button onclick="displayList(fruits)">Fruits</button>
+		<button onclick="displayList(spices)">Spices</button>
+		<button onclick="displayList(vegetables)">Vegetables</button>
+	</div>
 
-    // Define the Tab component
-    function Tab({ label, items }) {
-      return (
-        <div className="tabcontent">
-          <ul>
-            {items.map(item => <li key={item}>{item}</li>)}
-          </ul>
-        </div>
-      );
-    }
+	<ul id="list">
+	</ul>
 
-    // Define the App component
-    function App() {
-      const [activeTab, setActiveTab] = React.useState(0);
+	<script>
+		var fruits = ["Apple", "Banana", "Pear", "Watermelon", "Grape", "Strawberry", "Mango", "Blackberry"];
+		var spices = ["Salt", "Pepper", "Chilli", "Herbs", "Curry"];
+		var vegetables = ["Carrot", "Cucumber"];
 
-      return (
-        <div className="tab">
-          {tabsData.map((tab, index) =>
-            <button key={index} className={activeTab === index ? 'active' : ''} onClick={() => setActiveTab(index)}>
-              {tab.label}
-            </button>
-          )}
-          {tabsData.map((tab, index) =>
-            <Tab key={index} label={tab.label} items={tab.items} />
-          )}
-        </div>
-      );
-    }
+		var selectedItems = [];
+		var currentList = fruits;
 
-    // Render the App component to the DOM
-    ReactDOM.render(<App />, document.getElementById('root'));
-  </script>
+		function toggleSelection(index) {
+			if (selectedItems.includes(index)) {
+				selectedItems.splice(selectedItems.indexOf(index), 1);
+			} else {
+				selectedItems.push(index);
+			}
+			displayList(currentList);
+		}
+
+		function displayList(list) {
+			currentList = list;
+			var listHtml = "";
+			for (var i = 0; i < list.length; i++) {
+				var selected = selectedItems.includes(i) ? "selected" : "";
+				listHtml += '<li class="' + selected + '" onclick="toggleSelection(' + i + ')">' + list[i] + '</li>';
+			}
+			document.getElementById("list").innerHTML = listHtml;
+		}
+
+		displayList(fruits);
+	</script>
 </body>
 </html>
