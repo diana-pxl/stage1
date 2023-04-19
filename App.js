@@ -15,7 +15,7 @@ function TabbedList() {
         <button className={activeTab === 'Vegetables' ? 'active' : ''} onClick={() => toggleTab('Vegetables')}>Vegetables</button>
       </div>
 
-      <div id="fruits-list" className="tabcontent" style={{ display: activeTab === 'Fruits' ? 'block' : 'none' }}>
+      <div id="fruits-list" className="tabcontent">
         <ul>
           <li>Apple</li>
           <li>Banana</li>
@@ -28,7 +28,7 @@ function TabbedList() {
         </ul>
       </div>
 
-      <div id="spices-list" className="tabcontent" style={{ display: activeTab === 'Spices' ? 'block' : 'none' }}>
+      <div id="spices-list" className="tabcontent">
         <ul>
           <li>Salt</li>
           <li>Pepper</li>
@@ -38,7 +38,7 @@ function TabbedList() {
         </ul>
       </div>
 
-      <div id="vegetables-list" className="tabcontent" style={{ display: activeTab === 'Vegetables' ? 'block' : 'none' }}>
+      <div id="vegetables-list" className="tabcontent">
         <ul>
           <li>Carrot</li>
           <li>Cucumber</li>
